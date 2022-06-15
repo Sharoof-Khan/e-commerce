@@ -284,10 +284,10 @@ const NAV_ITEMS: Array<NavItem> = [
   
   {
     label: 'Products',
-    href: 'http://localhost:3000/products',
+    href: '/products',
   },
   {
     label: 'Cart',
-    href: 'http://localhost:3000/cart',
+    href: '/cart',
   },
 ];
