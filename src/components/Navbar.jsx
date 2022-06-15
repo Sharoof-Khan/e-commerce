@@ -284,10 +284,10 @@ const NAV_ITEMS: Array<NavItem> = [
   
   {
     label: 'Products',
-    href: 'https://kk-enterprises.vercel.app/products',
+    href: '/products',
   },
   {
     label: 'Cart',
-    href: 'https://kk-enterprises.vercel.app/cart',
+    href: '/cart',
   },
 ];
