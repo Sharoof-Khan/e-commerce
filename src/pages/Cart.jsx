@@ -43,7 +43,7 @@ const Cart = () => {
 
           })
       }
-      <Subtotal/>
+      { cart?.length >= 1 && <Subtotal />}
       {cart?.length >= 1 && < Button
         rounded={'none'}
         w={'full'}
