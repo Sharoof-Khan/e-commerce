@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_CART_FAILURE, ADD_PRODUCT_CART_REQUEST, ADD_PRODUCT_CART_SUCCESS, FETCH_CART_FAILURE, FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, REMOVE_FROM_CART_FAILURE, REMOVE_FROM_CART_REQUEST, REMOVE_FROM_CART_SUCCESS } from "./actionTypes"
+import { ADD_PRODUCT_CART_FAILURE, ADD_PRODUCT_CART_REQUEST, ADD_PRODUCT_CART_SUCCESS, FETCH_CART_FAILURE, FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, REMOVE_FROM_CART_FAILURE, REMOVE_FROM_CART_REQUEST, REMOVE_FROM_CART_SUCCESS, REMOVE_PRODUCT_FROM_CART_FAILURE, REMOVE_PRODUCT_FROM_CART_REQUEST, REMOVE_PRODUCT_FROM_CART_SUCCESS } from "./actionTypes"
 
 import Axios from "axios";
 
@@ -159,7 +159,38 @@ export const fetchCart = () => dispatch => {
 
 
 
-// *****************************************Remove Item From Kart *************************************
+// *****************************************Remove Item From Cart *************************************
+const removeProductFromCartRequest = (payload) => {
+    return {
+        type: REMOVE_PRODUCT_FROM_CART_REQUEST,
+        payload
+    }
+}
+
+const removeProductFromCartSuccess = (payload) => {
+
+    return {
+        type: REMOVE_PRODUCT_FROM_CART_SUCCESS,
+        payload
+    }
+    
+}
+
+const removeProductFromCartFailure = (payload) => {
+    return {
+        type: REMOVE_PRODUCT_FROM_CART_FAILURE,
+        payload
+    }
+}
+
+export const removeProductFromCart = (id) => dispatch => { 
+    dispatch(removeProductFromCartRequest())
+    Axios.delete(`/cart/${id}`)
+        .then(res => dispatch(removeProductFromCartSuccess(res.data)))
+        .then(()=> dispatch(fetchCart()))
+    .catch(e => dispatch(removeProductFromCartFailure(e.data)))
+}
+// *****************************************Remove Item From Cart AND SEND TO ORDER *************************************
 const removeFromCartRequest = (payload) => {
     return {
         type: REMOVE_FROM_CART_REQUEST,

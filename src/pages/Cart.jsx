@@ -3,7 +3,7 @@ import { Box, Button, Heading, Image, Stack, Text, useColorModeValue } from '@ch
 
 import{DeleteIcon} from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import {removeFromCart} from '../redux/products/action'
+import {removeFromCart, removeProductFromCart} from '../redux/products/action'
 import Subtotal from '../components/SubTotal'
 
 const Cart = () => {
@@ -13,7 +13,7 @@ const Cart = () => {
 
   const removeProduct = (id) => { 
     console.log("Going to remove product from Cart",id);
-    dispatch(removeFromCart(id))
+    dispatch(removeProductFromCart(id))
     
   }
   const addToCartHandler = () => {

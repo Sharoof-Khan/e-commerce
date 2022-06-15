@@ -7,7 +7,8 @@ const Profile = () => {
         <Flex>
             <Menu>
   <MenuButton as={Button} rounded = 'full' variant = 'link' >
-    <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
+    {/* <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' /> */}
+    <Avatar name='Profile' src='https://i.postimg.cc/qRDrBCs9/dp.jpg' />
           </MenuButton>
           <Box zIndex={'10000'}>
 

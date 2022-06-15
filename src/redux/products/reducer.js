@@ -1,11 +1,12 @@
-import { ADD_PRODUCT_CART_FAILURE, ADD_PRODUCT_CART_REQUEST, ADD_PRODUCT_CART_SUCCESS, FETCH_CART_FAILURE, FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, REMOVE_FROM_CART_FAILURE, REMOVE_FROM_CART_REQUEST, REMOVE_FROM_CART_SUCCESS } from "./actionTypes";
+import { ADD_PRODUCT_CART_FAILURE, ADD_PRODUCT_CART_REQUEST, ADD_PRODUCT_CART_SUCCESS, FETCH_CART_FAILURE, FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, REMOVE_FROM_CART_FAILURE, REMOVE_FROM_CART_REQUEST, REMOVE_FROM_CART_SUCCESS, REMOVE_PRODUCT_FROM_CART_FAILURE, REMOVE_PRODUCT_FROM_CART_REQUEST, REMOVE_PRODUCT_FROM_CART_SUCCESS } from "./actionTypes";
 
 const initState = {
     products: [],
     error: "",
     loading: false,
     currentProduct: {},
-    cart: []
+    cart: [],
+    order:[]
 }
 
 
@@ -110,14 +111,35 @@ const reducer = (state = initState, action) => {
                 loading: true,
                 error:""
             }
-        // case REMOVE_FROM_CART_SUCCESS:
-        //     return {
-        //         ...state,
-        //         loading: false,
-        //         error: "",
+        case REMOVE_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: "",
                 
-        //     }
+            }
         case REMOVE_FROM_CART_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error:payload
+            }
+        // ***********************************For Product Remove From Cart*********************************************************
+        
+        case REMOVE_PRODUCT_FROM_CART_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error:""
+            }
+        case REMOVE_PRODUCT_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: "",
+                
+            }
+        case REMOVE_PRODUCT_FROM_CART_FAILURE:
             return {
                 ...state,
                 loading: false,
