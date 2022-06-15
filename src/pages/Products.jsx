@@ -112,10 +112,10 @@ const Products = (id) => {
           </Heading>
           <Stack direction={'row'} align={'center'}>
             <Text fontWeight={800} fontSize={'xl'}>
-              ₹ {Math.round(price*20)}
+              ₹ {Math.round(price)}
             </Text>
             <Text textDecoration={'line-through'} color={'gray.600'}>
-              ₹ {Math.round((price + 500)*15)}
+              ₹ {Math.round((price >= 20000? price + 5000: price + 500))}
             </Text>
           </Stack>
         </Stack>
