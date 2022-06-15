@@ -9,6 +9,8 @@ const initState = {
 }
 
 
+export const getCartTotal = (cart) =>  
+    cart?.reduce((amount,payload) => payload.price + amount,0 )
 const reducer = (state = initState, action) => {
     const { type, payload } = action;
 

@@ -4,6 +4,7 @@ import { Box, Button, Heading, Image, Stack, Text, useColorModeValue } from '@ch
 import{DeleteIcon} from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import {removeFromCart} from '../redux/products/action'
+import Subtotal from '../components/SubTotal'
 
 const Cart = () => {
   const cart = useSelector(store => store.ecommerceData.cart)
@@ -41,7 +42,8 @@ const Cart = () => {
             />
 
           })
-        }
+      }
+      <Subtotal/>
       {cart?.length >= 1 && < Button
         rounded={'none'}
         w={'full'}
