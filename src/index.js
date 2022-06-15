@@ -9,7 +9,8 @@ import { store } from './redux/store'
 import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-axios.defaults.baseURL= "http://localhost:8080/"
+// axios.defaults.baseURL= "http://localhost:8080/"
+axios.defaults.baseURL= "https://kk-enterprises.herokuapp.com/"
 axios.defaults.headers.post["Content-Type"] = "application/json";    //x-www-form-urlencoded
 root.render(
   

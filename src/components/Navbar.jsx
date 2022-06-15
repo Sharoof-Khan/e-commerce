@@ -70,7 +70,7 @@ export default function WithSubnavigation() {
               }}
             
             >
-            Logo
+            KK ENTERPRISES
             </Text>
             
 
