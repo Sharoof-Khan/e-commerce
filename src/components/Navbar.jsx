@@ -27,7 +27,8 @@ import Profile from './Profile';
 import {BsCart3} from 'react-icons/bs'
 import CartCounter from './CartCounter';
 
-import { Link as RouterLink, Outlet } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+// import { Link  } from 'react-router-dom';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
@@ -58,7 +59,8 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Link Link as={RouterLink} to = "/products" >
+          {/* <Link  to = "/products" > */}
+          <Link as={RouterLink}  to="/products">
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
@@ -74,7 +76,8 @@ export default function WithSubnavigation() {
             </Text>
             
 
-              </Link>
+            </Link>
+            {/* </RouterLink> */}
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
@@ -88,13 +91,16 @@ export default function WithSubnavigation() {
           spacing={6}>
           
           {/* <BsCart3 /> */}
-          <Link as={RouterLink} to = "/cart">
+          <Link as={RouterLink} to ="/cart">
+
+          {/* <RouterLink to="/cart"> */}
             
-          <Box position='relative' padding='0 0.5rem 0 0'>
+          <Box position='relative' padding='0 0.5rem 0 0' marginTop={'6px'}>
           <CartCounter/>
-          <Icon as={BsCart3} boxSize = "2rem"  />
+          <Icon as={BsCart3} boxSize = "2rem"   />
           </Box>
-          </Link>
+            </Link>
+            {/* </RouterLink> */}
           
           <Profile/>
           
@@ -214,7 +220,7 @@ const MobileNav = () => {
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
       p={4}
-      display={{ md: 'none' }}>
+      display={{  md: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
@@ -230,7 +236,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
       <Flex
         py={2}
         as={Link}
-        href={href ?? '#'}
+        to={href ?? '#'}
         justify={'space-between'}
         align={'center'}
         _hover={{
@@ -288,6 +294,6 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Cart',
-    href: '/cart',
+    to: '/cart',
   },
 ];

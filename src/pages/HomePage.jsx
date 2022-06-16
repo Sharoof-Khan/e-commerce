@@ -28,7 +28,7 @@ export  const HomePage =() => {
       <Box marginTop={'2%'} >
         <Marquee speed={80}>
           <Text fontSize={'2xl'} color='#EF5350'>
-            WELCOME TO KK ENTERPRISESS WE ARE PROVIDE HIGH QUALITY PRODUCTS AND SERVICES
+            ...WELCOME TO KK ENTERPRISESS WE ARE PROVIDE HIGH QUALITY PRODUCTS AND SERVICES 
           </Text>
         </Marquee>
       </Box>

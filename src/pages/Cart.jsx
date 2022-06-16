@@ -5,6 +5,9 @@ import{DeleteIcon} from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import {removeFromCart, removeProductFromCart} from '../redux/products/action'
 import Subtotal from '../components/SubTotal'
+import { Checkout } from '../components/Checkout'
+import Marquee from "react-fast-marquee";
+
 
 const Cart = () => {
   const cart = useSelector(store => store.ecommerceData.cart)
@@ -16,7 +19,8 @@ const Cart = () => {
     dispatch(removeProductFromCart(id))
     
   }
-  const addToCartHandler = () => {
+  const handleCheckout = () => {
+
   
   }
   return (
@@ -25,41 +29,33 @@ const Cart = () => {
         Cart
       </Heading>
 
-      {!cart.length && <Text>No items in cart</Text>}
-      
+      {!cart.length &&
+        <Marquee speed={'80'} >
         
+        <Text fontSize={'3xl'} color='red' fontStyle={'italic'} fontWeight='bold' > No items in cart !!!, Continue Shopping... </Text>
+        </Marquee>
+      }
+      
+      <Box minHeight={'75vh'}>
         {
           cart.map(item => {
-
+            
             return <CartItem
             id = {item.id}
-              key={item.id}
-              image={item.image}
-              title={item.title}
-              price={item.price}
-              description={item.description}
-              removeProduct = {removeProduct}
+            key={item.id}
+            image={item.image}
+            title={item.title}
+            price={item.price}
+            description={item.description}
+            removeProduct = {removeProduct}
             />
-
+            
           })
-      }
-      { cart?.length >= 1 && <Subtotal />}
-      {cart?.length >= 1 && < Button
-        rounded={'none'}
-        w={'full'}
-        mt={8}
-        size={'lg'}
-        py={'7'}
-        bg={('black')}
-        color={('white')}
-        textTransform={'uppercase'}
-        _hover={{
-          transform: 'translateY(2px)',
-          boxShadow: 'lg',
-        }}
-        onClick={addToCartHandler}>
-        CheckOut
-      </Button>}
+        }
+        </Box> 
+      {cart?.length >= 1 && <Subtotal />}
+      
+      {cart?.length >= 1 && <Checkout cart={cart } handleCheckout = {handleCheckout} />} 
       
 
     </Box >

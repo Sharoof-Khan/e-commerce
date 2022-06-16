@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_CART_FAILURE, ADD_PRODUCT_CART_REQUEST, ADD_PRODUCT_CART_SUCCESS, FETCH_CART_FAILURE, FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, REMOVE_FROM_CART_FAILURE, REMOVE_FROM_CART_REQUEST, REMOVE_FROM_CART_SUCCESS, REMOVE_PRODUCT_FROM_CART_FAILURE, REMOVE_PRODUCT_FROM_CART_REQUEST, REMOVE_PRODUCT_FROM_CART_SUCCESS } from "./actionTypes"
+import { ADD_PRODUCT_CART_FAILURE, ADD_PRODUCT_CART_REQUEST, ADD_PRODUCT_CART_SUCCESS, ADD_PRODUCT_ORDER_FAILURE, ADD_PRODUCT_ORDER_REQUEST, ADD_PRODUCT_ORDER_SUCCESS, FETCH_CART_FAILURE, FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, REMOVE_FROM_CART_FAILURE, REMOVE_FROM_CART_REQUEST, REMOVE_FROM_CART_SUCCESS, REMOVE_PRODUCT_FROM_CART_FAILURE, REMOVE_PRODUCT_FROM_CART_REQUEST, REMOVE_PRODUCT_FROM_CART_SUCCESS } from "./actionTypes"
 
 import Axios from "axios";
 
@@ -221,6 +221,46 @@ export const removeFromCart = (id) => dispatch => {
         .then(()=> dispatch(fetchCart()))
     .catch(e => dispatch(removeFromCartFailure(e.data)))
 }
+
+
+
+// *****************************************Send Order *************************************
+
+const addProductOrderRequest = (payload) => {
+    return {
+        type: ADD_PRODUCT_ORDER_REQUEST,
+        payload
+    }
+}
+
+const addProductOrderSuccess = (payload) => {
+
+    return {
+        type: ADD_PRODUCT_ORDER_SUCCESS,
+        payload
+    }
+    
+}
+
+const addProductOrderFailure = (payload) => {
+    return {
+        type: ADD_PRODUCT_ORDER_FAILURE,
+        payload
+    }
+}
+
+
+
+
+export const addProductOrder = (product) => dispatch => {
+    dispatch(addProductOrderRequest())
+
+    Axios.post('/order', product)
+        .then(res => dispatch(addProductOrderSuccess(res.data)))
+    .then(res => dispatch(addProductOrderFailure(res.data)))
+}
+
+
 
 
 

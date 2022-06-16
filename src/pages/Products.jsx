@@ -107,7 +107,7 @@ const Products = (id) => {
           <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
             Brand
           </Text>
-          <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
+          <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500} overflow='hidden' textOverflow={'ellipsis'} width='300px' whiteSpace={'nowrap'}>
             {title}
           </Heading>
           <Stack direction={'row'} align={'center'}>
