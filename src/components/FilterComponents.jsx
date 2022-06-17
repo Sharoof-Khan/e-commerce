@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Box,Text,Checkbox,CheckboxGroup,VStack, Menu,MenuButton,MenuList,MenuItem,MenuItemOption,MenuGroup,MenuOptionGroup, MenuDivider, Button, HStack, Stack,} from '@chakra-ui/react'
+import { Box, Text, Checkbox, CheckboxGroup, VStack, Menu, MenuButton, MenuList, MenuDivider, Button, Stack, } from '@chakra-ui/react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {fetchdata} from '../redux/products/action'
@@ -33,8 +33,8 @@ const FilterComponents = () => {
 
 
   return (
-      <div>
-          <Box>
+      <div >
+          <Box mt={'2%'}>
               <Box display={{base:"none",md:"block"}} p ="1rem 2rem">
                   <Text fontSize="2xl">Filters</Text>
                   <Text>Category</Text>

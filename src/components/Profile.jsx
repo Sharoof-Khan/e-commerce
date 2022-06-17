@@ -1,6 +1,8 @@
 import { Avatar, Button, Flex, Menu, MenuButton, MenuItem, MenuList,Box } from '@chakra-ui/react'
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
 const Profile = () => {
     return (
       
@@ -16,6 +18,9 @@ const Profile = () => {
     {/* <MenuItem>Cart</MenuItem> */}
     <MenuItem>Login</MenuItem>
     <MenuItem>Logout</MenuItem>
+    <Link to={'/orders'} >
+      <MenuItem>Orders</MenuItem>
+    </Link>
     
   </MenuList>
           </Box>

@@ -1,66 +1,70 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Button, Heading, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 
 import{DeleteIcon} from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import {addProductOrder, removeFromCart, removeProductFromCart} from '../redux/products/action'
-import Subtotal from '../components/SubTotal'
-import { Checkout } from '../components/Checkout'
+import { fetchOrder, removeFromOrder} from '../redux/products/action'
+// import Subtotal from '../components/SubTotal'
+// import { Checkout } from '../components/Checkout'
 import Marquee from "react-fast-marquee";
+import { nanoid } from 'nanoid'
 
 
-const Cart = () => {
-  const cart = useSelector(store => store.ecommerceData.cart)
+
+const Order = () => {
+  const order = useSelector(store => store.ecommerceData.orders)
   const dispatch = useDispatch()
-  // console.log(cart, 'cart');
-
-  const removeProduct = (id) => { 
-    console.log("Going to remove product from Cart",id);
-    dispatch(removeProductFromCart(id))
-    
-  }
-  const handleCheckout = () => {
-
-    console.log("Going to checkout");
-    dispatch(addProductOrder(cart))
-
+  console.log(order, 'order');
 
   
+  useEffect(() => {
+
+      dispatch(fetchOrder(order))
+    
+    
+  }, [dispatch])
+
+  const cancelOrder = (id) => { 
+    console.log("Going to remove product from Cart",id);
+    dispatch(removeFromOrder(id))
+    
   }
+  
   return (
     <Box>
       <Heading as={'h2'} size='xl' textAlign={'center'}>
-        Cart
+       Your Order
       </Heading>
 
-      {!cart.length &&
+      {!order.length &&
         <Marquee speed={'80'} >
         
-        <Text fontSize={'3xl'} color='red' fontStyle={'italic'} fontWeight='bold' > No items in cart !!!, Continue Shopping... </Text>
+        <Text fontSize={'3xl'} color='red' fontStyle={'italic'} fontWeight='bold' > No Order !!!, Continue Shopping... </Text>
         </Marquee>
       }
       
       <Box minHeight={'75vh'}>
         {
-          cart.map(item => {
+          order.map(item => {
             
             return <CartItem
+              key={nanoid(3)}
+            // id = {nanoid(3)}
             id = {item.id}
-            key={item.id}
             image={item.image}
             title={item.title}
             price={item.price}
             description={item.description}
-              removeProduct={removeProduct}
+              cancelOrder={cancelOrder}
             />
             
           })
         }
         </Box> 
-      {cart?.length >= 1 && <Subtotal />}
+      {/* {order?.length >= 1 && <Subtotal />} */}
       
               {/* handleCheckout = {handleCheckout} */}
-      {cart?.length >= 1 && <Checkout cart={cart } handleCheckout = {handleCheckout}  />} 
+      {/* {order?.length >= 1 && <Checkout order={order } handleCheckout = {'s'}  />}  */}
       
 
     </Box >
@@ -71,7 +75,7 @@ const Cart = () => {
 //  const image =
 //   'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80';
 
-function CartItem({title,image,description,price,removeProduct,id}) { 
+function CartItem({title,image,description,price,cancelOrder,id}) { 
 
 
 
@@ -121,7 +125,7 @@ function CartItem({title,image,description,price,removeProduct,id}) {
               ₹ {price}
             </Text>
 
-            <Button  variant={'outline'} leftIcon = {<DeleteIcon/>} onClick={()=>removeProduct(id)}>Remove </Button>
+            <Button  variant={'outline'} leftIcon = {<DeleteIcon/>} onClick={()=>cancelOrder(id)}>Cancel Order </Button>
           </Stack>
             
           
@@ -134,4 +138,4 @@ function CartItem({title,image,description,price,removeProduct,id}) {
 
 }
 
-export default Cart
+export default Order

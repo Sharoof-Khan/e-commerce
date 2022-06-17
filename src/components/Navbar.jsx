@@ -15,6 +15,7 @@ import {
   useBreakpointValue,
   useDisclosure,
   color,
+  textDecoration,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -60,16 +61,18 @@ export default function WithSubnavigation() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           {/* <Link  to = "/products" > */}
-          <Link as={RouterLink}  to="/products">
+          <Link as={RouterLink}  to="/">
           <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
+              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+              fontFamily={'heading'}
               color={useColorModeValue('gray.800', 'white')}
               textDecoration="none"
-              _hover={{
-                textDecorationLine: 'none',
-                // color:"blue"
-              }}
+              _focus={{ textDecoration: 'none' }}
+              _hover={{ textDecoration: 'none' }}
+             
+
+
+              // a:hover={{textDecorationLine:"none"}}
             
             >
             KK ENTERPRISES
@@ -77,11 +80,18 @@ export default function WithSubnavigation() {
             
 
             </Link>
-            {/* </RouterLink> */}
+          {/* </RouterLink> */}
 
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <Link as={RouterLink} to='/products'>
+          
+          <Box display={{base:'none', md:'block'}} ml='3%' minWidth={'100px'}>
+            <Text>Products</Text>
+          </Box>
+          </Link>
+
+          {/* <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
-          </Flex>
+          </Flex> */}
         </Flex>
 
         <Stack
@@ -95,7 +105,7 @@ export default function WithSubnavigation() {
 
           {/* <RouterLink to="/cart"> */}
             
-          <Box position='relative' padding='0 0.5rem 0 0' marginTop={'6px'}>
+          <Box position='relative' padding='0 0.5rem 0 0' marginTop={'10px'}>
           <CartCounter/>
           <Icon as={BsCart3} boxSize = "2rem"   />
           </Box>
@@ -134,52 +144,52 @@ export default function WithSubnavigation() {
   );
 }
 
-const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+// const DesktopNav = () => {
+//   const linkColor = useColorModeValue('gray.600', 'gray.200');
+//   const linkHoverColor = useColorModeValue('gray.800', 'white');
+//   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
-  return (
-    <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}>
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
+//   return (
+//     <Stack direction={'row'} spacing={4}>
+//       {NAV_ITEMS.map((navItem) => (
+//         <Box key={navItem.label}>
+//           <Popover trigger={'hover'} placement={'bottom-start'}>
+//             <PopoverTrigger>
+//               <Link
+//                 p={2}
+//                 href={navItem.href ?? '#'}
+//                 fontSize={'sm'}
+//                 fontWeight={500}
+//                 color={linkColor}
+//                 _hover={{
+//                   textDecoration: 'none',
+//                   color: linkHoverColor,
+//                 }}>
+//                 {navItem.label}
+//               </Link>
+//             </PopoverTrigger>
 
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}>
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
-      ))}
-    </Stack>
-  );
-};
+//             {navItem.children && (
+//               <PopoverContent
+//                 border={0}
+//                 boxShadow={'xl'}
+//                 bg={popoverContentBgColor}
+//                 p={4}
+//                 rounded={'xl'}
+//                 minW={'sm'}>
+//                 <Stack>
+//                   {navItem.children.map((child) => (
+//                     <DesktopSubNav key={child.label} {...child} />
+//                   ))}
+//                 </Stack>
+//               </PopoverContent>
+//             )}
+//           </Popover>
+//         </Box>
+//       ))}
+//     </Stack>
+//   );
+// };
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
@@ -220,80 +230,80 @@ const MobileNav = () => {
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
       p={4}
-      display={{  md: 'none' }}>
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
+      display={{ md: 'none' }}>
+      <Link as={RouterLink} to='/products'>
+      <Text mr={'80%'}>Products</Text>
+      </Link>
     </Stack>
   );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure();
+// const MobileNavItem = ({ label, children, href }: NavItem) => {
+//   const { isOpen, onToggle } = useDisclosure();
 
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        to={href ?? '#'}
-        justify={'space-between'}
-        align={'center'}
-        _hover={{
-          textDecoration: 'none',
-        }}>
-        <Text
-          fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}>
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Flex>
+//   return (
+//     <Stack spacing={4} onClick={children && onToggle}>
+//       <Flex
+//         py={2}
+//         as={Link}
+//         to={href ?? '#'}
+//         justify={'space-between'}
+//         align={'center'}
+//         _hover={{
+//           textDecoration: 'none',
+//         }}>
+//         <Text
+//           fontWeight={600}
+//           color={useColorModeValue('gray.600', 'gray.200')}>
+//           {label}
+//         </Text>
+//         {children && (
+//           <Icon
+//             as={ChevronDownIcon}
+//             transition={'all .25s ease-in-out'}
+//             transform={isOpen ? 'rotate(180deg)' : ''}
+//             w={6}
+//             h={6}
+//           />
+//         )}
+//       </Flex>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}>
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
-  );
-};
+//       <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
+//         <Stack
+//           mt={2}
+//           pl={4}
+//           borderLeft={1}
+//           borderStyle={'solid'}
+//           borderColor={useColorModeValue('gray.200', 'gray.700')}
+//           align={'start'}>
+//           {children &&
+//             children.map((child) => (
+//               <Link key={child.label} py={2} href={child.href}>
+//                 {child.label}
+//               </Link>
+//             ))}
+//         </Stack>
+//       </Collapse>
+//     </Stack>
+//   );
+// };
 
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
+// interface NavItem {
+//   label: string;
+//   subLabel?: string;
+//   children?: Array<NavItem>;
+//   href?: string;
+// }
 
-const NAV_ITEMS: Array<NavItem> = [
+// const NAV_ITEMS: Array<NavItem> = [
   
   
-  {
-    label: 'Products',
-    href: '/products',
-  },
-  {
-    label: 'Cart',
-    to: '/cart',
-  },
-];
+//   {
+//     label: 'Products',
+//     href: '/products',
+//   },
+//   {
+//     label: 'Cart',
+//     to: '/cart',
+//   },
+// ];

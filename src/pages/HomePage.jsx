@@ -1,13 +1,11 @@
 import {
   Box,
-  chakra,
   Container,
   Stack,
   Text,
   Image,
   Flex,
   VStack,
-  Button,
   Heading,
   SimpleGrid,
   StackDivider,

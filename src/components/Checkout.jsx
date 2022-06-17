@@ -14,7 +14,7 @@ import {
   Text
 } from '@chakra-ui/react'
 import Subtotal from './SubTotal'
-export const Checkout =({cart}) => {
+export const Checkout =({cart,handleCheckout}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box>
@@ -77,8 +77,8 @@ export const Checkout =({cart}) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Confirem
+            <Button colorScheme='blue' mr={3} onClick={handleCheckout}>
+              Confirm
             </Button>
           </ModalFooter>
         </ModalContent>
